@@ -1,0 +1,24 @@
+{
+    "manifest_version": 3,
+    "name": "Dalto",
+    "version": "1.0",
+    "description": "A google chrome extension, a web accessability extension that allows users to see through a filter for color blind people",
+  
+    "icons": {
+      "16": "images/icon-16.png",
+      "32": "images/icon-32.png",
+      "48": "images/icon-48.png",
+      "128": "images/icon-128.png"
+    },
+    "content_scripts": [
+      {
+        "js": [
+          "scripts/content.js"
+        ],
+        "matches": [
+          "https://developer.chrome.com/docs/extensions/*",
+          "https://developer.chrome.com/docs/webstore/*"
+        ]
+      }
+    ]
+  }
