@@ -26,7 +26,10 @@
       "tabs"
     ],
     "browser_action": {
-      "default_title": "Prism",
-      "default_popup": "prism.html"
+      "default_icon": {                
+        "16": "images/icon_16px.png"     
+      },
+      "default_title": "Dalto",  
+      "default_popup": "popup.html"    
     }
   }
