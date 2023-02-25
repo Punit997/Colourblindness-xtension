@@ -1,6 +1,6 @@
 {
     "manifest_version": 3,
-    "name": "Dalto",
+    "name": "Dalton",
     "version": "1.0",
     "description": "A google chrome extension, a web accessability extension that allows users to see through a filter for color blind people",
   
@@ -30,7 +30,7 @@
       "default_icon": {                
         "16": "images/icon_16px.png"     
       },
-      "default_title": "Dalto",  
+      "default_title": "Dalton",  
       "default_popup": "popup.html"    
     }
   }
