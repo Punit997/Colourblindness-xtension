@@ -74,7 +74,7 @@ const descriptions = {
     let currentFilter = "Protanopia";
   
     list = Array.prototype.slice.call(list);
-    injectSVG();
+    injectCfilter();
   
     chrome.storage.sync.get(["filter"], (savedFilter) => {
       filter = savedFilter.filter;
@@ -89,6 +89,7 @@ const descriptions = {
       e.preventDefault();
       let newURL = "https://imahungrypanda.github.io/Prism/";
       chrome.tabs.create({ url: newURL });
+      /*Link where it takes user to the "get tested page" */
     });
   
     list.forEach(li => {
