@@ -22,7 +22,6 @@ const descriptions = {
     }
     /* It will highlight an HTML element on the page by applying a certain visual style to it, to indicate that it is currently selected or active */
   };
-  
   const deactive = IDfilter => {
     if (IDfilter) {
       document.getElementById(IDfilter).className = "";
@@ -87,14 +86,12 @@ const descriptions = {
       }
       setFilter(image, filter);
     }); /* This part retrieves the saved filter value from the browser's storage, depending on toggle it will change the element body */
-  
     document.getElementById('about').addEventListener("click", e => {
       e.preventDefault();
       let newURL = "https://imahungrypanda.github.io/Prism/";
       chrome.tabs.create({ url: newURL });
       /*Link where it takes user to the "get tested page" */
     });
-  
     CVDlist.forEach(li => {
       li.addEventListener('click', e => {
         if (document.getElementsByClassName("off")[0].className !== "off") {
