@@ -10,21 +10,24 @@ const descriptions = {
     "Achromatomaly" : "Diminished sensitivity to overall visible light."
   };
   
-  const clearFilter = (image, filterId) => {
+  const clearFilterOut = (image, IDfilter) => {
     setFilter(image, "");
-    deactive(filterId);
+    deactive(IDfilter);
+    /*removes existing filters to the image */
   };
   
-  const setActive = filterId => {
-    if (filterId) {
-      document.getElementById(filterId).className = "active";
+  const setActive = IDfilter => {
+    if (IDfilter) {
+      document.getElementById(IDfilter).className = "active";
     }
+    /* It will highlight an HTML element on the page by applying a certain visual style to it, to indicate that it is currently selected or active */
   };
   
-  const deactive = filterId => {
-    if (filterId) {
-      document.getElementById(filterId).className = "";
+  const deactive = IDfilter => {
+    if (IDfilter) {
+      document.getElementById(IDfilter).className = "";
     }
+    /* It is used to deactivate a filter by removing the "active" class from its corresponding filter element in the HTML. */
   };
   
   const setFilter = (image, filter) => {
@@ -36,12 +39,11 @@ const descriptions = {
     let filterURL = `url('#${filter.toLowerCase()}')`;
   
     image.style.filter = filterURL;
-  
-    // save filter to storage
+
     chrome.storage.sync.set({'filter':filter}, () => {
-    });
+    }); /* save filter to storage */
   
-    // send message to content.js
+    /* send message to content.js */
     chrome.tabs.getSelected(function(tab){
       chrome.tabs.sendMessage(tab.id, {
         action: 'render',
@@ -55,7 +57,7 @@ const descriptions = {
     let on  = document.getElementsByClassName("on")[0];
   
     if (on.className === "on") {
-    console.log(on);
+      console.log(on);
       off.className = "off";
       off.style.backgroundColor = "white";
       on.className += " active";
@@ -66,24 +68,25 @@ const descriptions = {
       off.className += " active";
       off.style.backgroundColor = "red";
     }
+    /* removable? */
   }
   
-  document.addEventListener('DOMContentLoaded', () => {
-    let list = document.getElementsByTagName('li');
-    let image = document.getElementsByTagName('body')[0];
-    let currentFilter = "Protanopia";
+  document.addEventListener('ContentLoad', () => {
+    let CVDlist = document.getElementsByTagName('li'); /*assigns all elements 'li' with CVDlist variable */
+    let image = document.getElementsByTagName('body')[0];/*selects 'body' and associates to image variable */
+    let presentFilter = "Protanopia";/* initiates with this setting */
   
-    list = Array.prototype.slice.call(list);
+    CVDlist = Array.prototype.slice.call(CVDlist);
     injectCfilter();
   
     chrome.storage.sync.get(["filter"], (savedFilter) => {
       filter = savedFilter.filter;
       if (filter !== "") {
         toggleOnOff();
-        currentFilter = filter;
+        presentFilter = filter;
       }
       setFilter(image, filter);
-    });
+    }); /* This part retrieves the saved filter value from the browser's storage, depending on toggle it will change the element body */
   
     document.getElementById('about').addEventListener("click", e => {
       e.preventDefault();
@@ -92,27 +95,27 @@ const descriptions = {
       /*Link where it takes user to the "get tested page" */
     });
   
-    list.forEach(li => {
+    CVDlist.forEach(li => {
       li.addEventListener('click', e => {
         if (document.getElementsByClassName("off")[0].className !== "off") {
           toggleOnOff();
         }
-        deactive(currentFilter);
-        currentFilter = e.target.textContent;
-        setFilter(image, currentFilter);
+        deactive(presentFilter);
+        presentFilter = e.target.textContent;
+        setFilter(image, presentFilter);
       });
-    });
+    }); /* checks whether the toggle is switched on or off, if not turns off and desactivates previous active filters and applies on the clicked CVD type */
   
     document.getElementsByClassName("on")[0].addEventListener("click", () => {
       toggleOnOff();
-      if (!currentFilter) {
-        currentFilter = "Protanopia";
+      if (!presentFilter) {
+        presentFilter = "Protanopia";
       }
-      setFilter(image, currentFilter);
-    });
+      setFilter(image, presentFilter);
+    }); /* it automatically sets the first option filter, if no other "presentfilter" is saved on selected */
   
     document.getElementsByClassName("off")[0].addEventListener("click", () => {
       toggleOnOff();
-      clearFilter(image, currentFilter);
-    });
+      clearFilterOut(image, presentFilter);
+    });/* it clears out any filter when toggle is switched off */
   });
