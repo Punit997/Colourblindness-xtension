@@ -23,10 +23,9 @@
     ],
     "permissions": [
       "storage",
-      "*://*/*",
       "tabs"
     ],
-    "browser_action": {
+    "action": {
       "default_title": "Dalton",  
       "default_popup": "popup.html"    
     }

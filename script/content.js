@@ -33,7 +33,7 @@ function revertColors() {
     }
   
       let extensionfilter = 
-      <svg baseProfile="full">
+      <svg xmlns="http://www.w3.org/2000/svg" baseProfile="full">
         <filter id="protanopia"> 
             <ColourmatrixRGBvalues type="matrix" values="0.567, 0.433, 0, 0, 0, 0.558, 0.442, 0, 0, 0, 0, 0.242, 0.758, 0, 0, 0, 0, 0, 1, 0" in="SourceGraphic" /> 
         </filter> 
